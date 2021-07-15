@@ -63,10 +63,11 @@ public class SimplePtChatPoc {
 
     private void sendPrivateMessage(String user, String message) {
         Session s = sessions.get(user);
-        s.getAsyncRemote().sendObject(message, result -> {
-            if (result.getException() != null) {
-                System.out.println("Unable to send message: " + result.getException());
-            }
-        });
+        if (s != null)
+            s.getAsyncRemote().sendObject(message, result -> {
+                if (result.getException() != null) {
+                    System.out.println("Unable to send message: " + result.getException());
+                }
+            });
     }
 }
